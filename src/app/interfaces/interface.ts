@@ -8,3 +8,14 @@ export interface Ingredient {
 export interface MealResponse {
     meals: Ingredient[];
   }
+
+  export interface Root {
+    meals: Platos[]
+  }
+  
+  export interface Platos {
+    strMeal: string
+    strMealThumb: string
+    idMeal: string
+  }
+  

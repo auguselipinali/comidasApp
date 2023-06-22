@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      TUKITUKI
+      Comidas
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,17 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
   </ion-header>
-  <ion-content padding>
-    <ion-list  [inset]="true">
-      <ion-item *ngFor="let ingredient of arrayIngredient.slice(0, 10)">
-        <ion-label>{{ ingredient.idIngredient }}</ion-label>
-        <ion-label>{{ ingredient.strIngredient }}</ion-label>
-        <ion-label>{{ ingredient.strDescription }}</ion-label>
-        <ion-label>{{ ingredient.strType }}</ion-label>
-      </ion-item>
-    </ion-list>
+      <ion-content *ngFor="let ingredient of arrayIngredient.slice(0, 10)">
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ ingredient.strIngredient }}</ion-card-title>
+    <ion-card-subtitle>{{ ingredient.idIngredient }}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{ ingredient.strDescription }}
+  </ion-card-content>
+  <ion-button>VER MENÚ</ion-button>
+</ion-card>
+    </ion-content>
