@@ -5,3 +5,16 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense"></ion-header>
+  <ion-card *ngFor="let ingredient of platosIngredientes">
+    <ion-card-header>
+      <ion-card-title>{{ ingredient.strMeal }}</ion-card-title>
+<!--       <ion-card-subtitle>{{ ingredient.idIngredient }}</ion-card-subtitle> -->
+    </ion-card-header>
+<!--     <ion-card-content>
+      {{ ingredient.strDescription }}
+    </ion-card-content>
+    <ion-button (click)="verMenu(ingredient.strIngredient)">VER MENÚ</ion-button> -->
+  </ion-card>
+</ion-content>

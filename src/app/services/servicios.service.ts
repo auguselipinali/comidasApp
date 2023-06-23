@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import { Ingredient, MealResponse, Platos, Root } from '../interfaces/interface'
+import { HttpClient } from '@angular/common/http';
+import { Root, Platos, MealResponse } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,36 @@ export class ServiciosService {
       accept: 'application/json',
     }
   };
-  constructor(private http:HttpClient) { }
+  platos: Platos[] = [];
+  ingrediente: Platos [] = [];
+  constructor(private http: HttpClient) { }
 
-  getIngredientes() {
+  getIngredientes(){
     const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
     return this.http.get<MealResponse>(url, this.options);
   }
-  getPlatos() {
-    return this.http.get<Root>('https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast', this.options);
+
+  getPlatosPorIngrediente(ingredient: string){
+    const url = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}';
+    return this.http.get<Root>(url, this.options);
+    
   }
 
+  getIdIngredient(ingredient: string){
+    return this.getPlatosPorIngrediente(ingredient).subscribe(response => {
+      console.log(response);
+      this.ingrediente = response.meals;
+    });
+    
+  }
+
+  
+
+  setPlatos(platos: Platos[]) {
+    this.platos = platos;
+  }
+
+  getPlatos(): Platos[] {
+    return this.platos;
+  }
 }

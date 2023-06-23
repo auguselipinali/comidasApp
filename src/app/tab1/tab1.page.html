@@ -1,25 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Comidas
+      <a href="#" (click)="mostrarTodos()">Ingredientes:</a>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-      <ion-content *ngFor="let ingredient of arrayIngredient.slice(0, 10)">
+<ion-item>
+  <ion-select label="Ingredientes:" (ionChange)="filterIngredient($event)" >
+    <ion-select-option value="Chicken">Chicken</ion-select-option>
+    <ion-select-option value="Beef">Beef</ion-select-option>
+    <ion-select-option value="Bacon">Bacon</ion-select-option>
+    <ion-select-option value="Salmon">Salmon</ion-select-option>
+    <ion-select-option value="Pork">Pork</ion-select-option>
+    <ion-select-option value="Avocado">Avocado</ion-select-option>
+    <ion-select-option value="Apple Cider Vinegar">Apple Cider Vinegar</ion-select-option>
+    <ion-select-option value="Asparagus">Asparagus</ion-select-option>
+    <ion-select-option value="Baby Plum Tomatoes">Baby Plum Tomatoes</ion-select-option>
+    <ion-select-option value="Baking Powder">Baking Powder</ion-select-option>
+  </ion-select>
+</ion-item>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>{{ ingredient.strIngredient }}</ion-card-title>
-    <ion-card-subtitle>{{ ingredient.idIngredient }}</ion-card-subtitle>
-  </ion-card-header>
+<ion-content>
+  <ion-list [inset]="true" *ngIf="!mostrarFiltro">
+    <ion-card *ngFor="let ingredient of arrayIngredient.slice(0, 11)">
+      <ion-card-header>
+        <ion-card-title>{{ ingredient.strIngredient }}</ion-card-title>
+        <ion-card-subtitle>{{ ingredient.idIngredient }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ ingredient.strDescription }}
+      </ion-card-content>
+      <ion-button (click)="verMenu(ingredient.strIngredient)">VER MENÚ</ion-button>
+    </ion-card>
+  </ion-list>
 
-  <ion-card-content>
-    {{ ingredient.strDescription }}
-  </ion-card-content>
-  <ion-button>VER MENÚ</ion-button>
-</ion-card>
-    </ion-content>
+  <ion-list [inset]="true" *ngIf="mostrarFiltro">
+    <ion-card *ngFor="let ingredientFiltro of arrayFiltroIngredient">
+      <ion-card-header>
+        <ion-card-title>{{ ingredientFiltro.strIngredient }}</ion-card-title>
+        <ion-card-subtitle>{{ ingredientFiltro.idIngredient }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ ingredientFiltro.strDescription }}
+      </ion-card-content>
+      <ion-button (click)="verMenu(ingredientFiltro.strIngredient)">VER MENÚ</ion-button>
+    </ion-card>
+  </ion-list>
+</ion-content>
